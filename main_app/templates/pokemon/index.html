@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Pokemon List</h1>
+
+{% for p in pokemon %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ p.name }}</span>
+      <p>Type: {{ p.type }}</p>
+      <p>Description: {{ p.description }}</p>
+      {% if p.height > 0 %}
+        <p>Height: {{ p.height }}</p>
+      {% else %}
+        <p>Height: None</p>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
