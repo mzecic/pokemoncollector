@@ -15,6 +15,10 @@
             <p>Height: None</p>
         {% endif %}
     </div>
+    <div class="card-action">
+        <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
+        <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+    </div>
   </div>
 
 {% endblock %}
