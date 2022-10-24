@@ -1,26 +1,23 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from .models import Pokemon
+from django.views.generic import CreateView, DeleteView, UpdateView
+from .models import Pokemon
 # Create your views here.
 
-class Pokemon:  # Note that parens are optional if not inheriting from another class
-  def __init__(self, name, pokemon_type, description, height):
-    self.name = name
-    self.pokemon_type = pokemon_type
-    self.description = description
-    self.height = height
-
-pokemon = [
-  Pokemon('Caterpie', 'bug', 'worm pokemon', 1),
-  Pokemon('Evee', 'normal', 'mammalian, quadrupedal pokemon', 1),
-  Pokemon('Togepi', 'normal', 'spikeball', 1)
-]
-
 def home(request):
-    return HttpResponse('<h1>Hello ϞϞ(๑⚈ ․̫ ⚈๑)∩</h1>')
+    return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')
 
 def pokemon_index(request):
+    pokemon = Pokemon.objects.all()
     return render(request, 'pokemon/index.html', { 'pokemon': pokemon })
+
+def pokemon_detail(request, pokemon_id):
+    pokemon = Pokemon.objects.get(id=pokemon_id)
+    return render(request, 'pokemon/detail.html', { 'pokemon': pokemon })
+
+class PokemonCreate(CreateView):
+    model = Pokemon
+    fields = '__all__'
